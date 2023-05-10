@@ -42,10 +42,14 @@ public abstract class SpringBootCondition implements Condition {
 
 	@Override
 	public final boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+		// 获取类名或方法名
 		String classOrMethodName = getClassOrMethodName(metadata);
 		try {
+			// 获取结果
 			ConditionOutcome outcome = getMatchOutcome(context, metadata);
+			// 打印日志
 			logOutcome(classOrMethodName, outcome);
+			//
 			recordEvaluation(context, classOrMethodName, outcome);
 			return outcome.isMatch();
 		}
